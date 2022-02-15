@@ -817,8 +817,12 @@ Sortable.prototype = /** @lends Sortable.prototype */ {
 
 			if (ghostEl) {
 				if (ghostMatrix) {
-					ghostMatrix.e += dx - (lastDx || 0);
-					ghostMatrix.f += dy - (lastDy || 0);
+					const vertical = this._getDirection(evt, evt.target) === 'vertical';
+					if (vertical) {
+						ghostMatrix.f += dy - (lastDy || 0);
+					} else {
+						ghostMatrix.e += dx - (lastDx || 0);
+					}
 				} else {
 					ghostMatrix = {
 						a: 1,
